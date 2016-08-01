@@ -1,5 +1,6 @@
 package com.river.news.base;
 
+import android.database.Observable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -55,6 +56,16 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
    */
   protected NavigationView mNavigationView;
 
+  /**
+   *
+   * 控制滑动与否的接口
+   */
+
+  /**
+   *结束Activity的可观测对象
+   */
+  protected Observable<Boolean> mFinishObservable;
+
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (getClass().isAnnotationPresent(ActivityFragmentInject.class)) {
@@ -69,5 +80,15 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }else{
       throw new RuntimeException("Class must add annotations of ActivityFragmentInitParams.class");
     }
+    setContentView(mContentViewId);
+    initToolbar();
+    initView();
+  }
+
+  private void initView() {
+
+  }
+
+  private void initToolbar() {
   }
 }
